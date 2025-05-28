@@ -1,18 +1,18 @@
 import os
 from datetime import datetime
 
-# --- Category definitions ---
+# ―― Category definitions ――
 categories = {
-    "Tech":        ["AI", "Startups", "Acquisitions", "Cybersecurity", "Gadgets"],
-    "Health":      ["Nutrition", "Mental Health", "Fitness", "Medical Research"],
-    "Finance":     ["Personal Finance", "Stock Market", "Cryptocurrency", "Fintech"],
-    "Lifestyle":   ["Travel", "Food & Dining", "Home Improvement", "Hobbies"],
-    "Education":   ["EdTech", "Online Learning", "Higher Education", "Study Tips"]
+    "Tech":      ["AI", "Startups", "Acquisitions", "Cybersecurity", "Gadgets"],
+    "Health":    ["Nutrition", "Mental Health", "Fitness", "Medical Research"],
+    "Finance":   ["Personal Finance", "Stock Market", "Cryptocurrency", "Fintech"],
+    "Lifestyle": ["Travel", "Food & Dining", "Home Improvement", "Hobbies"],
+    "Education": ["EdTech", "Online Learning", "Higher Education", "Study Tips"]
 }
 
 def build_prompt(category: str, subtopic: str, user_prompt: str, tone: str, target_words: int) -> str:
     """
-    Construct an instruction prompt for LLaMA 3.2 based on user inputs.
+    Construct an instruction prompt for LLaMA 3.2 via Ollama.
     """
     return (
         f"Write a {tone.lower()} article in the {category} category "
@@ -22,13 +22,13 @@ def build_prompt(category: str, subtopic: str, user_prompt: str, tone: str, targ
         "for publishing on Medium."
     )
 
-def save_markdown(content: str, directory: str = "articles", prefix: str = "article") -> str:
+def save_text(content: str, directory: str = "articles", prefix: str = "article") -> str:
     """
-    Save content to a Markdown file under `directory/`, returning the file path.
+    Save content to a .txt file under `directory/`, returning the file path.
     """
     os.makedirs(directory, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"{prefix}_{ts}.md"
+    filename = f"{prefix}_{ts}.txt"
     filepath = os.path.join(directory, filename)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
